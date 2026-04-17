@@ -10,9 +10,17 @@ import {
   filtrarApisPorLinea,
   generarManifiestoAI,
 } from '@/app/lib/catalogo';
-import { apiDefinitions } from '@/app/lib/api-definitions';
 
-const apisData = apiDefinitions;
+const apisData: ApiDefinition[] = [
+  { id: 'api-vida-cotizacion', nombre: 'Cotización Vida', descripcionSemantica: 'Genera cotizaciones personalizadas de seguros de vida basadas en perfil del asegurado', lineaSeguro: 'vida', aiCapability: 'quote_life_insurance', specUrl: '/specs/vida-cotizacion.yaml' },
+  { id: 'api-vida-beneficiarios', nombre: 'Beneficiarios Vida', descripcionSemantica: 'Gestiona beneficiarios de pólizas de vida, incluyendo alta, baja y modificación', lineaSeguro: 'vida', aiCapability: 'manage_life_beneficiaries', specUrl: '/specs/vida-beneficiarios.yaml' },
+  { id: 'api-hogar-poliza', nombre: 'Póliza Hogar', descripcionSemantica: 'Gestiona pólizas de seguros de hogar, consulta coberturas y estado de la póliza', lineaSeguro: 'hogar', aiCapability: 'manage_home_policy', specUrl: '/specs/hogar-poliza.yaml' },
+  { id: 'api-hogar-siniestro', nombre: 'Siniestro Hogar', descripcionSemantica: 'Reporta y da seguimiento a siniestros de seguros de hogar', lineaSeguro: 'hogar', aiCapability: 'report_home_claim', specUrl: '/specs/hogar-siniestro.yaml' },
+  { id: 'api-autos-cotizacion', nombre: 'Cotización Autos', descripcionSemantica: 'Genera cotizaciones de seguros de autos según modelo, año y perfil del conductor', lineaSeguro: 'autos', aiCapability: 'quote_auto_insurance', specUrl: '/specs/autos-cotizacion.yaml' },
+  { id: 'api-autos-siniestro', nombre: 'Siniestro Autos', descripcionSemantica: 'Reporta siniestros de seguros de autos con documentación fotográfica', lineaSeguro: 'autos', aiCapability: 'report_auto_claim', specUrl: '/specs/autos-siniestro.yaml' },
+  { id: 'api-salud-autorizacion', nombre: 'Autorización Salud', descripcionSemantica: 'Solicita autorizaciones de servicios de salud y consulta estado de aprobación', lineaSeguro: 'salud', aiCapability: 'request_health_auth', specUrl: '/specs/salud-autorizacion.yaml' },
+  { id: 'api-salud-red-medica', nombre: 'Red Médica Salud', descripcionSemantica: 'Consulta la red de prestadores médicos disponibles por ubicación y especialidad', lineaSeguro: 'salud', aiCapability: 'query_health_network', specUrl: '/specs/salud-red-medica.yaml' },
+];
 
 const filtroTabs: { value: LineaSeguro | 'todas'; label: string }[] = [
   { value: 'todas', label: 'Todas' },
@@ -41,9 +49,7 @@ export default function CatalogoPage() {
 
   function handleExportManifiesto() {
     const manifiesto = generarManifiestoAI(apisData, filtroActivo);
-    const blob = new Blob([JSON.stringify(manifiesto, null, 2)], {
-      type: 'application/json',
-    });
+    const blob = new Blob([JSON.stringify(manifiesto, null, 2)], { type: 'application/json' });
     const url = URL.createObjectURL(blob);
     const link = document.createElement('a');
     link.href = url;
@@ -54,36 +60,28 @@ export default function CatalogoPage() {
     URL.revokeObjectURL(url);
   }
 
-  // Group filtered APIs by linea for section rendering
   const lineas: LineaSeguro[] = ['vida', 'hogar', 'autos', 'salud'];
   const apisPorLinea = lineas
-    .map((linea) => ({
-      linea,
-      apis: apisFiltradas.filter((api) => api.lineaSeguro === linea),
-    }))
+    .map((linea) => ({ linea, apis: apisFiltradas.filter((api) => api.lineaSeguro === linea) }))
     .filter((group) => group.apis.length > 0);
 
   return (
     <>
       <NavBar currentModule="catalogo" />
-      <main className="max-w-6xl mx-auto px-4 py-8 desktop:px-8">
+      <main className="max-w-6xl mx-auto px-5 py-8 desktop:px-10">
+        {/* Header */}
         <div className="flex flex-col desktop:flex-row desktop:items-center desktop:justify-between gap-4 mb-8">
           <div>
-            <h1 className="text-2xl font-inter font-bold text-gray-900">
+            <h1 className="text-2xl font-inter font-bold text-bolivar-gray-900 tracking-tight">
               Catálogo de APIs
             </h1>
-            <p className="text-sm font-inter text-gray-600 mt-1">
+            <p className="text-sm font-inter text-bolivar-gray-500 mt-1">
               Explora las APIs disponibles organizadas por línea de seguro
             </p>
           </div>
           <button
             onClick={handleExportManifiesto}
-            className="
-              inline-flex items-center gap-2 px-4 py-2 rounded font-inter font-medium text-sm
-              bg-bolivar-green text-bolivar-white
-              hover:bg-bolivar-green/90 transition-colors
-              focus:outline-none focus-visible:ring-2 focus-visible:ring-bolivar-yellow
-            "
+            className="sb-btn sb-btn--primary"
             aria-label="Exportar Manifiesto AI"
           >
             <Download size={18} aria-hidden="true" />
@@ -92,47 +90,32 @@ export default function CatalogoPage() {
         </div>
 
         {/* Filter tabs */}
-        <div
-          className="flex flex-wrap gap-2 mb-8"
-          role="tablist"
-          aria-label="Filtrar APIs por línea de seguro"
-        >
+        <div className="flex flex-wrap gap-2 mb-8" role="tablist" aria-label="Filtrar APIs por línea de seguro">
           {filtroTabs.map((tab) => (
             <button
               key={tab.value}
               role="tab"
               aria-selected={filtroActivo === tab.value}
               onClick={() => setFiltroActivo(tab.value)}
-              className={`
-                px-4 py-2 rounded font-inter font-medium text-sm transition-colors
-                focus:outline-none focus-visible:ring-2 focus-visible:ring-bolivar-yellow
-                ${
-                  filtroActivo === tab.value
-                    ? 'bg-bolivar-green text-bolivar-white'
-                    : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
-                }
-              `}
+              className={`sb-tab ${filtroActivo === tab.value ? 'sb-tab--active' : 'sb-tab--inactive'}`}
             >
               {tab.label}
             </button>
           ))}
         </div>
 
-        {/* API sections by linea */}
+        {/* API sections */}
         {apisPorLinea.length === 0 ? (
-          <p className="text-center text-gray-500 font-inter py-12">
+          <p className="text-center text-bolivar-gray-500 font-inter py-12">
             No se encontraron APIs para el filtro seleccionado.
           </p>
         ) : (
           apisPorLinea.map(({ linea, apis }) => (
             <section key={linea} className="mb-10" aria-labelledby={`section-${linea}`}>
-              <h2
-                id={`section-${linea}`}
-                className="text-xl font-inter font-bold text-gray-900 mb-4 border-b border-gray-200 pb-2"
-              >
+              <h2 id={`section-${linea}`} className="sb-section-heading">
                 {lineaTitles[linea]}
               </h2>
-              <div className="grid grid-cols-1 desktop:grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 desktop:grid-cols-2 gap-5">
                 {apis.map((api) => (
                   <TarjetaApi key={api.id} api={api} onClick={handleCardClick} />
                 ))}
