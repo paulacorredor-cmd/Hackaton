@@ -21,7 +21,10 @@ const lineaLabels: Record<LineaSeguro, string> = {
 
 const lineaSeguroArb = fc.constantFrom<LineaSeguro>(...LINEAS_SEGURO);
 
-/** Safe non-empty string generator: only printable ASCII, no whitespace-only */
+/**
+ * Safe non-empty string generator: only printable ASCII, no leading/trailing
+ * whitespace and no consecutive spaces (DOM collapses them).
+ */
 const safeStringArb = (minLen: number, maxLen: number) =>
   fc
     .array(
@@ -30,8 +33,8 @@ const safeStringArb = (minLen: number, maxLen: number) =>
       ),
       { minLength: minLen, maxLength: maxLen },
     )
-    .map((chars) => chars.join(''))
-    .filter((s) => s.trim().length > 0);
+    .map((chars) => chars.join('').replace(/\s+/g, ' ').trim())
+    .filter((s) => s.length > 0);
 
 /**
  * Generator for valid ApiDefinition objects.
