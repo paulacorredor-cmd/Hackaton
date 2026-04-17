@@ -1,7 +1,8 @@
 'use client';
 
+import React, { useState } from 'react';
 import Link from 'next/link';
-import { Shield, BookOpen, Bot } from 'lucide-react';
+import { Shield, BookOpen, Bot, Menu, X } from 'lucide-react';
 
 interface NavBarProps {
   currentModule: 'onboarding' | 'catalogo' | 'playground';
@@ -14,54 +15,98 @@ const navLinks = [
 ] as const;
 
 export default function NavBar({ currentModule }: NavBarProps) {
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
   return (
     <nav
-      className="flex items-center justify-between bg-bolivar-green px-5 py-3.5 desktop:px-10 shadow-sb-nav"
+      className="bg-bolivar-green px-4 py-3 desktop:px-8"
       aria-label="Navegación principal"
     >
-      <Link
-        href="/"
-        className="flex items-center gap-3 focus:outline-none focus-visible:ring-2 focus-visible:ring-bolivar-yellow rounded-sb"
-        aria-label="Seguros Bolívar — Ir al inicio"
-      >
-        <div className="flex items-center gap-2">
-          <div className="w-8 h-8 bg-bolivar-yellow rounded-full flex items-center justify-center">
-            <span className="text-bolivar-green font-inter font-bold text-sm">SB</span>
-          </div>
-          <span className="text-bolivar-white font-inter font-bold text-lg desktop:text-xl tracking-tight">
+      <div className="flex items-center justify-between">
+        <Link
+          href="/"
+          className="flex items-center gap-2 focus:outline-none focus-visible:ring-2 focus-visible:ring-bolivar-yellow rounded"
+          aria-label="Seguros Bolívar — Ir al inicio"
+        >
+          <span className="text-bolivar-yellow font-inter font-bold text-lg desktop:text-xl">
             Seguros Bolívar
           </span>
-        </div>
-        <span className="text-bolivar-yellow/80 font-inter text-sm hidden desktop:inline font-light">
-          Developer Portal
-        </span>
-      </Link>
+          <span className="text-bolivar-white font-inter text-sm hidden desktop:inline">
+            Developer Portal
+          </span>
+        </Link>
 
-      <ul className="flex items-center gap-1.5 desktop:gap-2" role="list">
-        {navLinks.map(({ module, href, label, icon: Icon }) => {
-          const isActive = currentModule === module;
-          return (
-            <li key={module}>
-              <Link
-                href={href}
-                aria-current={isActive ? 'page' : undefined}
-                className={`
-                  flex items-center gap-2 px-4 py-2 rounded-sb text-sm font-inter font-medium
-                  transition-all duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-bolivar-yellow
-                  ${isActive
-                    ? 'bg-bolivar-yellow text-bolivar-green-dark shadow-sb-button'
-                    : 'text-bolivar-white/90 hover:bg-white/10 hover:text-white'
-                  }
-                `}
-              >
-                <Icon size={18} aria-hidden="true" />
-                <span className="hidden mobile:hidden desktop:inline">{label}</span>
-                <span className="desktop:hidden sr-only">{label}</span>
-              </Link>
-            </li>
-          );
-        })}
-      </ul>
+        {/* Desktop nav links */}
+        <ul className="hidden desktop:flex items-center gap-4" role="list">
+          {navLinks.map(({ module, href, label, icon: Icon }) => {
+            const isActive = currentModule === module;
+            return (
+              <li key={module}>
+                <Link
+                  href={href}
+                  aria-current={isActive ? 'page' : undefined}
+                  className={`
+                    flex items-center gap-1.5 px-3 py-2 rounded text-sm font-inter font-medium
+                    transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-bolivar-yellow
+                    ${isActive
+                      ? 'bg-bolivar-yellow text-bolivar-green'
+                      : 'text-bolivar-white hover:bg-bolivar-yellow/20'
+                    }
+                  `}
+                >
+                  <Icon size={18} aria-hidden="true" />
+                  <span>{label}</span>
+                </Link>
+              </li>
+            );
+          })}
+        </ul>
+
+        {/* Mobile hamburger button */}
+        <button
+          type="button"
+          className="desktop:hidden p-2 rounded text-bolivar-white hover:bg-bolivar-yellow/20 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-bolivar-yellow"
+          onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+          aria-expanded={mobileMenuOpen}
+          aria-controls="mobile-nav-menu"
+          aria-label={mobileMenuOpen ? 'Cerrar menú de navegación' : 'Abrir menú de navegación'}
+        >
+          {mobileMenuOpen ? <X size={24} aria-hidden="true" /> : <Menu size={24} aria-hidden="true" />}
+        </button>
+      </div>
+
+      {/* Mobile nav menu */}
+      {mobileMenuOpen && (
+        <ul
+          id="mobile-nav-menu"
+          className="desktop:hidden mt-3 pb-2 flex flex-col gap-1 border-t border-bolivar-yellow/30 pt-3"
+          role="list"
+        >
+          {navLinks.map(({ module, href, label, icon: Icon }) => {
+            const isActive = currentModule === module;
+            return (
+              <li key={module}>
+                <Link
+                  href={href}
+                  aria-current={isActive ? 'page' : undefined}
+                  onClick={() => setMobileMenuOpen(false)}
+                  className={`
+                    flex items-center gap-3 px-3 py-3 rounded text-sm font-inter font-medium
+                    transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-bolivar-yellow
+                    ${isActive
+                      ? 'bg-bolivar-yellow text-bolivar-green'
+                      : 'text-bolivar-white hover:bg-bolivar-yellow/20'
+                    }
+                  `}
+                >
+                  <Icon size={20} aria-hidden="true" />
+                  <span>{label}</span>
+                </Link>
+              </li>
+            );
+          })}
+        </ul>
+      )}
     </nav>
   );
 }

@@ -11,6 +11,7 @@
  * Valida: Requisitos 11.1, 11.2, 11.3, 11.4, 11.5
  */
 
+import React from 'react';
 import { render, screen, within, fireEvent, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { describe, it, expect, vi, beforeEach } from 'vitest';
@@ -150,8 +151,9 @@ describe('Accesibilidad — Navegación por teclado (Req 11.1)', () => {
       const user = userEvent.setup();
       render(<NavBar currentModule="onboarding" />);
 
+      // Desktop links (hidden on mobile but present in DOM)
       const links = screen.getAllByRole('link');
-      expect(links.length).toBeGreaterThanOrEqual(4); // logo + 3 módulos
+      expect(links.length).toBeGreaterThanOrEqual(4); // logo + 3 desktop módulos
 
       // Cada enlace debe ser focusable
       for (const link of links) {
@@ -164,6 +166,13 @@ describe('Accesibilidad — Navegación por teclado (Req 11.1)', () => {
       render(<NavBar currentModule="catalogo" />);
       const nav = screen.getByRole('navigation');
       expect(nav).toHaveAttribute('aria-label', 'Navegación principal');
+    });
+
+    it('el botón hamburguesa es focusable por teclado', () => {
+      render(<NavBar currentModule="onboarding" />);
+      const menuBtn = screen.getByRole('button', { name: /abrir menú/i });
+      menuBtn.focus();
+      expect(menuBtn).toHaveFocus();
     });
   });
 
