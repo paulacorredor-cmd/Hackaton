@@ -1,3 +1,4 @@
+import React from 'react';
 import Link from 'next/link';
 import { Shield, BookOpen, Bot, ArrowRight } from 'lucide-react';
 import NavBar from '@/app/components/ui/NavBar';
@@ -30,12 +31,12 @@ export default function HomePage() {
 
       <main className="flex-1">
         {/* Hero */}
-        <section className="bg-bolivar-green px-4 py-16 desktop:py-24 desktop:px-8">
+        <section className="bg-bolivar-green px-4 py-10 desktop:py-24 desktop:px-8">
           <div className="max-w-4xl mx-auto text-center">
-            <h1 className="text-3xl desktop:text-5xl font-inter font-bold text-bolivar-yellow mb-4">
+            <h1 className="text-2xl desktop:text-5xl font-inter font-bold text-bolivar-yellow mb-3 desktop:mb-4">
               Bolívar API Developer Portal
             </h1>
-            <p className="text-base desktop:text-lg font-inter text-bolivar-white max-w-2xl mx-auto mb-8">
+            <p className="text-sm desktop:text-lg font-inter text-bolivar-white max-w-2xl mx-auto mb-6 desktop:mb-8 leading-relaxed">
               Integra las APIs de Seguros Bolívar bajo el estándar Open Insurance colombiano.
               Regístrate, explora el catálogo y prueba con inteligencia artificial.
             </p>
@@ -56,19 +57,19 @@ export default function HomePage() {
         </section>
 
         {/* Features */}
-        <section className="px-4 py-12 desktop:py-16 desktop:px-8" aria-labelledby="features-heading">
+        <section className="px-4 py-8 desktop:py-16 desktop:px-8" aria-labelledby="features-heading">
           <div className="max-w-5xl mx-auto">
             <h2
               id="features-heading"
-              className="text-2xl desktop:text-3xl font-inter font-bold text-gray-900 text-center mb-10"
+              className="text-xl desktop:text-3xl font-inter font-bold text-gray-900 text-center mb-6 desktop:mb-10"
             >
               ¿Qué ofrece el portal?
             </h2>
-            <div className="grid grid-cols-1 desktop:grid-cols-3 gap-6 desktop:gap-8">
+            <div className="grid grid-cols-1 desktop:grid-cols-3 gap-4 desktop:gap-8">
               {features.map(({ icon: Icon, title, description }) => (
                 <article
                   key={title}
-                  className="rounded-lg border border-gray-200 p-6 hover:shadow-md transition-shadow"
+                  className="rounded-lg border border-gray-200 p-5 desktop:p-6 hover:shadow-md transition-shadow"
                 >
                   <div className="flex items-center justify-center w-12 h-12 rounded-full bg-bolivar-green/10 mb-4">
                     <Icon size={24} className="text-bolivar-green" aria-hidden="true" />

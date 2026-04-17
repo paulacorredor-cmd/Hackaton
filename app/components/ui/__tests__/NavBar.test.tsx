@@ -1,4 +1,6 @@
+import React from 'react';
 import { render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import { describe, it, expect, vi } from 'vitest';
 import NavBar from '../NavBar';
 
@@ -15,26 +17,26 @@ describe('NavBar', () => {
     expect(screen.getByText('Seguros Bolívar')).toBeInTheDocument();
   });
 
-  it('renderiza enlaces a los tres módulos', () => {
+  it('renderiza enlaces a los tres módulos en desktop', () => {
     render(<NavBar currentModule="onboarding" />);
     const nav = screen.getByRole('navigation', { name: /navegación principal/i });
     expect(nav).toBeInTheDocument();
 
     const links = screen.getAllByRole('link');
-    // Logo link + 3 module links
+    // Logo link + 3 desktop module links
     expect(links.length).toBe(4);
   });
 
   it('marca el módulo activo con aria-current="page"', () => {
     render(<NavBar currentModule="catalogo" />);
-    const catalogoLink = screen.getByRole('link', { name: /catálogo/i });
-    expect(catalogoLink).toHaveAttribute('aria-current', 'page');
+    const catalogoLinks = screen.getAllByRole('link', { name: /catálogo/i });
+    expect(catalogoLinks[0]).toHaveAttribute('aria-current', 'page');
   });
 
   it('no marca módulos inactivos con aria-current', () => {
     render(<NavBar currentModule="onboarding" />);
-    const catalogoLink = screen.getByRole('link', { name: /catálogo/i });
-    expect(catalogoLink).not.toHaveAttribute('aria-current');
+    const catalogoLinks = screen.getAllByRole('link', { name: /catálogo/i });
+    expect(catalogoLinks[0]).not.toHaveAttribute('aria-current');
   });
 
   it('tiene aria-label en el enlace del logotipo', () => {
@@ -47,5 +49,27 @@ describe('NavBar', () => {
     render(<NavBar currentModule="playground" />);
     const nav = screen.getByRole('navigation');
     expect(nav).toHaveAttribute('aria-label', 'Navegación principal');
+  });
+
+  it('tiene un botón de menú hamburguesa para móvil', () => {
+    render(<NavBar currentModule="onboarding" />);
+    const menuBtn = screen.getByRole('button', { name: /abrir menú/i });
+    expect(menuBtn).toBeInTheDocument();
+    expect(menuBtn).toHaveAttribute('aria-expanded', 'false');
+  });
+
+  it('abre el menú móvil al hacer click en el hamburguesa', async () => {
+    const user = userEvent.setup();
+    render(<NavBar currentModule="onboarding" />);
+
+    const menuBtn = screen.getByRole('button', { name: /abrir menú/i });
+    await user.click(menuBtn);
+
+    const mobileMenu = document.getElementById('mobile-nav-menu');
+    expect(mobileMenu).toBeInTheDocument();
+
+    // Ahora hay links duplicados (desktop + mobile)
+    const allLinks = screen.getAllByRole('link');
+    expect(allLinks.length).toBe(7); // logo + 3 desktop + 3 mobile
   });
 });

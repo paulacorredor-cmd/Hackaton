@@ -26,18 +26,18 @@ export default function OnboardingLayout({
     <div className="min-h-screen flex flex-col">
       <NavBar currentModule="onboarding" />
 
-      <nav aria-label="Progreso del onboarding" className="bg-white border-b border-gray-200 px-4 py-4 desktop:px-8">
-        <ol className="flex items-center justify-center gap-2 desktop:gap-4" role="list">
+      <nav aria-label="Progreso del onboarding" className="bg-white border-b border-gray-200 px-3 py-3 desktop:px-8 desktop:py-4">
+        <ol className="flex items-center justify-center gap-1 desktop:gap-4" role="list">
           {STEPS.map((step, index) => {
             const isCompleted = index < activeStep;
             const isCurrent = index === activeStep;
 
             return (
-              <li key={step.path} className="flex items-center gap-2 desktop:gap-4">
-                <div className="flex items-center gap-2">
+              <li key={step.path} className="flex items-center gap-1 desktop:gap-4">
+                <div className="flex items-center gap-1.5 desktop:gap-2">
                   <span
                     className={`
-                      flex items-center justify-center w-8 h-8 rounded-full text-sm font-inter font-semibold
+                      flex items-center justify-center w-7 h-7 desktop:w-8 desktop:h-8 rounded-full text-xs desktop:text-sm font-inter font-semibold shrink-0
                       ${isCurrent
                         ? 'bg-bolivar-green text-bolivar-white'
                         : isCompleted
@@ -51,7 +51,7 @@ export default function OnboardingLayout({
                   </span>
                   <span
                     className={`
-                      text-sm font-inter font-medium
+                      text-xs desktop:text-sm font-inter font-medium whitespace-nowrap
                       ${isCurrent ? 'text-bolivar-green' : isCompleted ? 'text-gray-700' : 'text-gray-400'}
                     `}
                     aria-current={isCurrent ? 'step' : undefined}
@@ -62,7 +62,7 @@ export default function OnboardingLayout({
 
                 {index < STEPS.length - 1 && (
                   <div
-                    className={`w-8 desktop:w-16 h-0.5 ${
+                    className={`w-6 desktop:w-16 h-0.5 shrink-0 ${
                       index < activeStep ? 'bg-bolivar-yellow' : 'bg-gray-200'
                     }`}
                     aria-hidden="true"

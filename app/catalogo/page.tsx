@@ -172,7 +172,7 @@ export default function CatalogoPage() {
 
         {/* Filter tabs */}
         <div
-          className="flex flex-wrap gap-2 mb-8"
+          className="flex gap-2 mb-8 overflow-x-auto pb-2 -mx-4 px-4 desktop:mx-0 desktop:px-0 desktop:flex-wrap desktop:overflow-visible"
           role="tablist"
           aria-label="Filtrar APIs por línea de seguro"
         >
@@ -183,7 +183,7 @@ export default function CatalogoPage() {
               aria-selected={filtroActivo === tab.value}
               onClick={() => setFiltroActivo(tab.value)}
               className={`
-                px-4 py-2 rounded font-inter font-medium text-sm transition-colors
+                px-4 py-2 rounded font-inter font-medium text-sm transition-colors whitespace-nowrap shrink-0
                 focus:outline-none focus-visible:ring-2 focus-visible:ring-bolivar-yellow
                 ${
                   filtroActivo === tab.value
