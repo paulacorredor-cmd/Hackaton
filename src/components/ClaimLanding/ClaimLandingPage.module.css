@@ -1,0 +1,60 @@
+.page {
+  min-height: 100vh;
+  background-color: var(--color-background, #F5F5F5);
+}
+
+.content {
+  width: 100%;
+  max-width: var(--max-content-width, 720px);
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.title {
+  margin: 24px 0 0;
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--color-text-primary, #1A1A1A);
+}
+
+.subtitle {
+  margin: 8px 0 0;
+  font-size: 16px;
+  color: var(--color-text-secondary, #4A4A4A);
+  line-height: 1.5;
+}
+
+.modeSection {
+  margin-top: 24px;
+}
+
+.startButtonWrapper {
+  margin-top: 24px;
+}
+
+.existingRequestsText {
+  margin: 32px 0 16px;
+  font-size: 14px;
+  color: var(--color-text-secondary, #4A4A4A);
+}
+
+.actionCards {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding-bottom: 32px;
+}
+
+@media (max-width: 767px) {
+  .content {
+    padding: 0 16px;
+  }
+
+  .title {
+    font-size: 20px;
+  }
+
+  .subtitle {
+    font-size: var(--font-size-min, 14px);
+  }
+}

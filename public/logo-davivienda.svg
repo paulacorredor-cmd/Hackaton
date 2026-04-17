@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 280 50" fill="none">
+  <!-- Casita Davivienda -->
+  <g transform="translate(0,2)">
+    <!-- Techo -->
+    <polygon points="24,4 4,22 44,22" fill="#D4760A"/>
+    <rect x="20" y="2" width="8" height="6" fill="#8B0000" rx="1"/>
+    <!-- Casa -->
+    <rect x="8" y="22" width="32" height="24" rx="2" fill="#ED1C27"/>
+    <!-- Ventanas -->
+    <circle cx="18" cy="30" r="4" fill="#FFD700"/>
+    <circle cx="30" cy="30" r="4" fill="#FFD700"/>
+    <!-- Puerta -->
+    <ellipse cx="24" cy="42" rx="5" ry="7" fill="#4A90D9"/>
+    <!-- Personaje en puerta -->
+    <circle cx="24" cy="37" r="3" fill="#FFD700"/>
+  </g>
+  <!-- Texto DAVIVIENDA -->
+  <text x="55" y="38" font-family="Arial, sans-serif" font-size="32" font-weight="bold" fill="#ED1C27" letter-spacing="1">DAVIVIENDA</text>
+</svg>
