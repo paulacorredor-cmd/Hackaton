@@ -1,0 +1,33 @@
+:root {
+  /* Colors */
+  --color-primary: #ED1C27;
+  --color-primary-dark: #C8151F;
+  --color-primary-accessible: #B91C1C;
+  --color-white: #FFFFFF;
+  --color-text-primary: #1A1A1A;
+  --color-text-secondary: #4A4A4A;
+  --color-background: #F5F5F5;
+  --color-border: #E0E0E0;
+  --color-disabled: #CCCCCC;
+
+  /* Typography */
+  --font-size-min: 14px;
+
+  /* Layout */
+  --max-content-width: 720px;
+}
+
+/* Desktop: ≥1024px */
+@media (min-width: 1024px) {
+  :root {
+    --layout-padding: 0 24px;
+  }
+}
+
+/* Mobile: <768px */
+@media (max-width: 767px) {
+  :root {
+    --layout-padding: 0 16px;
+    --font-size-base: var(--font-size-min);
+  }
+}

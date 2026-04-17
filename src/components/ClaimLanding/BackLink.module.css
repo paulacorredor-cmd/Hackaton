@@ -1,0 +1,30 @@
+.backLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  color: var(--color-text-primary, #1A1A1A);
+  text-decoration: none;
+  font-size: 14px;
+  padding: 8px 0;
+  cursor: pointer;
+}
+
+.backLink:hover {
+  text-decoration: underline;
+}
+
+.backLink:focus-visible {
+  outline: 2px solid var(--color-primary, #ED1C27);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+.arrow {
+  flex-shrink: 0;
+}
+
+@media (max-width: 767px) {
+  .backLink {
+    font-size: var(--font-size-min, 14px);
+  }
+}
