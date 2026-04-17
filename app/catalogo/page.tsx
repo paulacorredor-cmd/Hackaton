@@ -2,9 +2,10 @@
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { Download } from 'lucide-react';
+import { Download, Key } from 'lucide-react';
 import NavBar from '@/app/components/ui/NavBar';
 import TarjetaApi from '@/app/components/catalogo/TarjetaApi';
+import { useSandboxCredentials } from '@/app/lib/sandboxContext';
 import {
   type ApiDefinition,
   type LineaSeguro,
@@ -97,6 +98,7 @@ const lineaTitles: Record<LineaSeguro, string> = {
 
 export default function CatalogoPage() {
   const router = useRouter();
+  const { credentials: sandboxCredentials } = useSandboxCredentials();
   const [filtroActivo, setFiltroActivo] = useState<LineaSeguro | 'todas'>('todas');
 
   const apisFiltradas = filtrarApisPorLinea(apisData, filtroActivo);
@@ -142,19 +144,30 @@ export default function CatalogoPage() {
               Explora las APIs disponibles organizadas por línea de seguro
             </p>
           </div>
-          <button
-            onClick={handleExportManifiesto}
-            className="
-              inline-flex items-center gap-2 px-4 py-2 rounded font-inter font-medium text-sm
-              bg-bolivar-green text-bolivar-white
-              hover:bg-bolivar-green/90 transition-colors
-              focus:outline-none focus-visible:ring-2 focus-visible:ring-bolivar-yellow
-            "
-            aria-label="Exportar Manifiesto AI"
-          >
-            <Download size={18} aria-hidden="true" />
-            Exportar Manifiesto AI
-          </button>
+          <div className="flex items-center gap-3">
+            {sandboxCredentials && (
+              <span
+                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-inter font-medium bg-green-100 text-green-800"
+                aria-label="Credenciales sandbox conectadas"
+              >
+                <Key size={14} aria-hidden="true" />
+                Sandbox conectado
+              </span>
+            )}
+            <button
+              onClick={handleExportManifiesto}
+              className="
+                inline-flex items-center gap-2 px-4 py-2 rounded font-inter font-medium text-sm
+                bg-bolivar-green text-bolivar-white
+                hover:bg-bolivar-green/90 transition-colors
+                focus:outline-none focus-visible:ring-2 focus-visible:ring-bolivar-yellow
+              "
+              aria-label="Exportar Manifiesto AI"
+            >
+              <Download size={18} aria-hidden="true" />
+              Exportar Manifiesto AI
+            </button>
+          </div>
         </div>
 
         {/* Filter tabs */}

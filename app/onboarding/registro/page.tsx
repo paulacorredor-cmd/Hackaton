@@ -58,8 +58,10 @@ export default function RegistroPage() {
 
     setSubmitting(true);
     try {
-      // In a real app this would POST to an API endpoint.
-      // For now we just navigate to the next step.
+      // Almacenar un ID de socio temporal para la sesión de onboarding.
+      // En producción, esto vendría del backend tras registrar al socio.
+      const socioId = `socio_${Date.now()}`;
+      sessionStorage.setItem('bolivar_socio_id', socioId);
       router.push('/onboarding/terminos');
     } finally {
       setSubmitting(false);

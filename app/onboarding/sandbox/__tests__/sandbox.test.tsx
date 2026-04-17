@@ -7,6 +7,16 @@ vi.mock('next/navigation', () => ({
   useRouter: () => ({ push: pushMock }),
 }));
 
+// Mock sandbox context
+const setCredentialsMock = vi.fn();
+vi.mock('@/app/lib/sandboxContext', () => ({
+  useSandboxCredentials: () => ({
+    credentials: null,
+    setCredentials: setCredentialsMock,
+    clearCredentials: vi.fn(),
+  }),
+}));
+
 // Provide deterministic UUIDs
 let uuidCounter = 0;
 const mockUUID = vi.fn(() => {
