@@ -129,11 +129,18 @@ describe('procesarInstruccion', () => {
     expect(resultado.pasos[2].tipo).toBe('respuesta');
   });
 
-  it('retorna respuesta con 1 paso cuando no se identifica endpoint', () => {
+  it('retorna mensaje de contacto #773 cuando no se identifica endpoint', () => {
     const resultado = procesarInstruccion('xyz abc def', apiDefinitions);
-    expect(resultado.mensajeAgente).toContain('No encontré');
+    expect(resultado.mensajeAgente).toContain('Por favor comuníquese con el # 773');
     expect(resultado.pasos).toHaveLength(1);
     expect(resultado.pasos[0].tipo).toBe('interpretacion');
+  });
+
+  it('usa tono de usted en respuesta exitosa', () => {
+    const resultado = procesarInstruccion('Cotizar seguro de vida', apiDefinitions);
+    expect(resultado.mensajeAgente).toContain('le');
+    expect(resultado.mensajeAgente).not.toMatch(/\btú\b/i);
+    expect(resultado.mensajeAgente).not.toMatch(/\btu\b/i);
   });
 
   it('cada paso tiene id, timestamp y duracionMs', () => {
