@@ -73,7 +73,7 @@ Implementación incremental del portal de desarrolladores de Seguros Bolívar us
 - [x] 4. Checkpoint — Verificar módulo de Onboarding
   - Asegurar que todos los tests pasan, preguntar al usuario si surgen dudas.
 
-- [x] 5. Implementar módulo de Catálogo de APIs
+- [ ] 5. Implementar módulo de Catálogo de APIs
   - [x] 5.1 Crear tipos, utilidades de filtrado y función de generación de manifiesto AI
     - Definir interfaces `ApiDefinition`, `LineaSeguro`, `ManifiestoAI`, `ManifiestoTool`
     - Implementar función de filtrado de APIs por línea de seguro (incluyendo filtro 'todas')
@@ -100,14 +100,14 @@ Implementación incremental del portal de desarrolladores de Seguros Bolívar us
     - **Propiedad 5: Tarjeta API contiene información requerida**
     - **Valida: Requisitos 5.3**
 
-  - [x] 5.6 Escribir tests unitarios para catálogo y tarjetas
+  - [~] 5.6 Escribir tests unitarios para catálogo y tarjetas
     - Test de renderizado de secciones por línea de seguro
     - Test de navegación al seleccionar tarjeta
     - Test de botón de exportar manifiesto
     - _Requisitos: 5.1, 5.2, 5.5, 7.1_
 
-- [x] 6. Implementar Visor de Documentación y proxy de sandbox
-  - [x] 6.1 Crear visor de documentación interactivo y API Route de proxy
+- [ ] 6. Implementar Visor de Documentación y proxy de sandbox
+  - [~] 6.1 Crear visor de documentación interactivo y API Route de proxy
     - Implementar `app/catalogo/[apiId]/page.tsx` con renderizado de especificación OpenAPI 3.1
     - Mostrar lista de endpoints, métodos HTTP, parámetros y esquemas de respuesta
     - Implementar formulario de petición de prueba con credenciales sandbox precargadas
@@ -116,17 +116,17 @@ Implementación incremental del portal de desarrolladores de Seguros Bolívar us
     - Manejo de errores de red/timeout con mensaje descriptivo y sugerencia de resolución
     - _Requisitos: 6.1, 6.2, 6.3, 6.4, 6.5_
 
-  - [x] 6.2 Escribir test de propiedad para formateo de respuesta HTTP
+  - [~] 6.2 Escribir test de propiedad para formateo de respuesta HTTP
     - **Propiedad 6: Formateo de respuesta HTTP incluye todos los campos**
     - **Valida: Requisitos 6.3**
 
-  - [x] 6.3 Escribir tests unitarios para visor de documentación
+  - [~] 6.3 Escribir tests unitarios para visor de documentación
     - Test de renderizado de especificación OpenAPI
     - Test de credenciales precargadas
     - Test de manejo de errores de red/timeout
     - _Requisitos: 6.1, 6.4, 6.5_
 
-- [x] 7. Checkpoint — Verificar módulo de Catálogo
+- [~] 7. Checkpoint — Verificar módulo de Catálogo
   - Asegurar que todos los tests pasan, preguntar al usuario si surgen dudas.
 
 - [x] 8. Implementar módulo AI Playground
@@ -163,30 +163,30 @@ Implementación incremental del portal de desarrolladores de Seguros Bolívar us
 - [x] 9. Checkpoint — Verificar módulo AI Playground
   - Asegurar que todos los tests pasan, preguntar al usuario si surgen dudas.
 
-- [ ] 10. Implementar seguridad, autenticación y auditoría
-  - [ ] 10.1 Configurar autenticación OAuth 2.0 + OIDC y middleware de protección de rutas
+- [x] 10. Implementar seguridad, autenticación y auditoría
+  - [x] 10.1 Configurar autenticación OAuth 2.0 + OIDC y middleware de protección de rutas
     - Implementar `app/api/auth/[...nextauth]/route.ts` con proveedor OAuth 2.0 + OpenID Connect
     - Crear middleware para proteger rutas de catálogo y playground (requieren autenticación)
     - Implementar `app/api/sandbox/route.ts` para creación de aplicación sandbox
     - _Requisitos: 10.1, 10.2_
 
-  - [ ] 10.2 Implementar verificación de expiración de sesión y log de auditoría
+  - [x] 10.2 Implementar verificación de expiración de sesión y log de auditoría
     - Implementar función de verificación de sesión: expirada si inactividad ≥ 15 minutos
     - Cierre automático de sesión con redirección a login y mensaje informativo
     - Registrar acciones del socio (login, peticiones sandbox, exportación manifiesto) en log de auditoría con timestamp e ID del socio
     - _Requisitos: 10.4, 10.5_
 
-  - [ ] 10.3 Escribir test de propiedad para expiración de sesión
+  - [x] 10.3 Escribir test de propiedad para expiración de sesión
     - **Propiedad 10: Expiración de sesión por inactividad**
     - **Valida: Requisitos 10.4**
 
-  - [ ] 10.4 Escribir tests unitarios para seguridad
+  - [x] 10.4 Escribir tests unitarios para seguridad
     - Test de enmascaramiento de Client_Secret
     - Test de redirección a login por sesión expirada
     - _Requisitos: 10.3, 10.4_
 
-- [ ] 11. Implementar tests de accesibilidad
-  - [ ] 11.1 Crear suite de tests de accesibilidad para todos los módulos
+- [x] 11. Implementar tests de accesibilidad
+  - [x] 11.1 Crear suite de tests de accesibilidad para todos los módulos
     - Verificar navegación completa por teclado en cada módulo (catálogo, playground, onboarding)
     - Verificar contraste mínimo 4.5:1 con combinaciones de colores institucionales
     - Verificar presencia de `aria-label` en todos los campos de formulario
@@ -194,24 +194,24 @@ Implementación incremental del portal de desarrolladores de Seguros Bolívar us
     - Verificar estructura semántica con h2/h3 en catálogo
     - _Requisitos: 11.1, 11.2, 11.3, 11.4, 11.5_
 
-- [ ] 12. Integración final y cableado de módulos
-  - [ ] 12.1 Conectar flujo completo de onboarding con autenticación y catálogo
+- [x] 12. Integración final y cableado de módulos
+  - [x] 12.1 Conectar flujo completo de onboarding con autenticación y catálogo
     - Integrar registro → términos → sandbox → redirección a catálogo
     - Asegurar que credenciales sandbox se propagan al visor de documentación y AI Playground
     - Conectar middleware de autenticación con todos los módulos protegidos
     - _Requisitos: 2.4, 3.4, 4.1, 8.6, 10.1_
 
-  - [ ] 12.2 Crear página de landing/home
+  - [x] 12.2 Crear página de landing/home
     - Implementar `app/page.tsx` con presentación del portal y acceso a onboarding
     - _Requisitos: 1.1_
 
-  - [ ] 12.3 Escribir tests de integración
+  - [x] 12.3 Escribir tests de integración
     - Test de flujo completo de onboarding (registro → términos → sandbox)
     - Test de peticiones al sandbox desde visor de documentación
     - Test de interacción con agente AI en playground
     - _Requisitos: 2.4, 3.4, 4.1, 6.2, 8.4_
 
-- [ ] 13. Checkpoint final — Verificar integración completa
+- [x] 13. Checkpoint final — Verificar integración completa
   - Asegurar que todos los tests pasan, preguntar al usuario si surgen dudas.
 
 ## Notas

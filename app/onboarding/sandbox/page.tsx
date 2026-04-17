@@ -5,12 +5,7 @@ import { useRouter } from 'next/navigation';
 import { CheckCircle, Loader2 } from 'lucide-react';
 import CopyToClipboard from '@/app/components/ui/CopyToClipboard';
 import ErrorMessage from '@/app/components/ui/ErrorMessage';
-
-interface SandboxCredentials {
-  clientId: string;
-  clientSecret: string;
-  createdAt: string;
-}
+import { useSandboxCredentials, type SandboxCredentials } from '@/app/lib/sandboxContext';
 
 const MAX_RETRIES = 3;
 
@@ -36,6 +31,7 @@ async function createSandboxCredentials(): Promise<SandboxCredentials> {
 
 export default function SandboxPage() {
   const router = useRouter();
+  const { setCredentials: setSandboxCredentials } = useSandboxCredentials();
   const [credentials, setCredentials] = useState<SandboxCredentials | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -48,6 +44,9 @@ export default function SandboxPage() {
     try {
       const creds = await createSandboxCredentials();
       setCredentials(creds);
+      // Propagar credenciales al contexto global para que estén disponibles
+      // en el Visor de Documentación y AI Playground
+      setSandboxCredentials(creds);
     } catch (err) {
       const message =
         err instanceof Error
@@ -57,7 +56,7 @@ export default function SandboxPage() {
     } finally {
       setLoading(false);
     }
-  }, []);
+  }, [setSandboxCredentials]);
 
   useEffect(() => {
     fetchCredentials();

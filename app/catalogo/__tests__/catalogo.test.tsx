@@ -16,6 +16,15 @@ vi.mock('next/link', () => ({
   ),
 }));
 
+// Mock sandbox context
+vi.mock('@/app/lib/sandboxContext', () => ({
+  useSandboxCredentials: () => ({
+    credentials: null,
+    setCredentials: vi.fn(),
+    clearCredentials: vi.fn(),
+  }),
+}));
+
 describe('CatalogoPage', () => {
   beforeEach(() => {
     pushMock.mockClear();
