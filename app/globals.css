@@ -57,8 +57,8 @@
   }
 }
 
-/* ===== SB Button Styles ===== */
 @layer components {
+  /* ===== SB Button ===== */
   .sb-btn {
     @apply inline-flex items-center justify-center gap-2 font-inter font-semibold text-sm
            transition-all duration-200 ease-in-out cursor-pointer
@@ -69,40 +69,24 @@
   }
 
   .sb-btn--primary {
-    @apply bg-bolivar-green text-white;
-    &:hover {
-      @apply bg-bolivar-green-dark;
-      box-shadow: var(--sb-shadow-card-hover);
-    }
-    &:focus-visible {
-      @apply ring-bolivar-yellow;
-    }
-    &:disabled {
-      @apply opacity-50 cursor-not-allowed;
-    }
+    @apply bg-bolivar-green text-white hover:bg-bolivar-green-dark
+           focus-visible:ring-bolivar-yellow disabled:opacity-50 disabled:cursor-not-allowed;
+  }
+  .sb-btn--primary:hover {
+    box-shadow: var(--sb-shadow-card-hover);
   }
 
   .sb-btn--secondary {
-    @apply bg-white text-bolivar-green border-2 border-bolivar-green;
-    &:hover {
-      @apply bg-bolivar-green-light;
-    }
-    &:focus-visible {
-      @apply ring-bolivar-green;
-    }
+    @apply bg-white text-bolivar-green border-2 border-bolivar-green
+           hover:bg-bolivar-green-light focus-visible:ring-bolivar-green;
   }
 
   .sb-btn--accent {
-    @apply bg-bolivar-yellow text-bolivar-green-dark;
-    &:hover {
-      @apply bg-bolivar-yellow-hover;
-    }
-    &:focus-visible {
-      @apply ring-bolivar-green;
-    }
+    @apply bg-bolivar-yellow text-bolivar-green-dark
+           hover:bg-bolivar-yellow-hover focus-visible:ring-bolivar-green;
   }
 
-  /* ===== SB Card Styles ===== */
+  /* ===== SB Card ===== */
   .sb-card {
     @apply bg-white;
     border: 1px solid var(--sb-color-border);
@@ -111,54 +95,48 @@
     transition: all var(--sb-transition);
     padding: 20px;
   }
-
   .sb-card:hover {
     border-color: var(--sb-color-border-hover);
     box-shadow: var(--sb-shadow-card-hover);
     transform: translateY(-1px);
   }
-
   .sb-card:focus-visible {
     @apply outline-none ring-2 ring-bolivar-yellow ring-offset-2;
   }
 
-  /* ===== SB Tab Styles ===== */
+  /* ===== SB Tab ===== */
   .sb-tab {
     @apply font-inter font-medium text-sm transition-all duration-200;
     padding: 8px 18px;
     border-radius: var(--sb-radius-md);
     border: 1.5px solid transparent;
   }
-
   .sb-tab--active {
     @apply bg-bolivar-green text-white;
     border-color: var(--sb-color-primary);
   }
-
   .sb-tab--inactive {
     @apply bg-bolivar-gray-100 text-bolivar-gray-700;
     border-color: var(--sb-color-border);
   }
-
   .sb-tab--inactive:hover {
     @apply bg-bolivar-gray-200;
     border-color: var(--sb-color-primary);
   }
 
-  /* ===== SB Badge Styles ===== */
+  /* ===== SB Badge ===== */
   .sb-badge {
     @apply inline-flex items-center font-inter font-medium text-xs whitespace-nowrap;
     padding: 3px 10px;
     border-radius: var(--sb-radius-xl);
     border: 1px solid;
   }
-
   .sb-badge--vida { @apply bg-purple-50 text-purple-700 border-purple-200; }
   .sb-badge--hogar { @apply bg-blue-50 text-blue-700 border-blue-200; }
   .sb-badge--autos { @apply bg-orange-50 text-orange-700 border-orange-200; }
   .sb-badge--salud { @apply bg-emerald-50 text-emerald-700 border-emerald-200; }
 
-  /* ===== SB Input Styles ===== */
+  /* ===== SB Input ===== */
   .sb-input {
     @apply w-full font-inter text-sm text-gray-900 bg-white;
     border: 1.5px solid var(--sb-color-border);
@@ -166,18 +144,17 @@
     padding: 10px 14px;
     transition: all var(--sb-transition);
   }
-
   .sb-input:focus {
     @apply outline-none;
     border-color: var(--sb-color-primary);
     box-shadow: 0 0 0 3px rgba(0, 132, 61, 0.12);
   }
-
   .sb-input--error {
     border-color: #EF4444;
-    &:focus {
-      box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.12);
-    }
+  }
+  .sb-input--error:focus {
+    border-color: #EF4444;
+    box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.12);
   }
 
   /* ===== SB Section Heading ===== */
