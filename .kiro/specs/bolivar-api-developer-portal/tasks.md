@@ -88,7 +88,7 @@ Implementación incremental del portal de desarrolladores de Seguros Bolívar us
     - **Propiedad 7: Generación de manifiesto AI con filtrado correcto**
     - **Valida: Requisitos 7.2, 7.4**
 
-  - [-] 5.4 Crear página del catálogo con tarjetas de API y filtros
+  - [x] 5.4 Crear página del catálogo con tarjetas de API y filtros
     - Implementar `app/catalogo/page.tsx` con secciones por línea de seguro (Vida, Hogar, Autos, Salud)
     - Implementar componente `TarjetaApi` con nombre, descripción semántica (x-ai-description) e indicador de línea
     - Pestañas/botones de filtro por línea de seguro
@@ -96,7 +96,7 @@ Implementación incremental del portal de desarrolladores de Seguros Bolívar us
     - Encabezados semánticos h2/h3 para secciones y tarjetas
     - _Requisitos: 5.1, 5.2, 5.3, 5.4, 5.5, 7.1, 7.3, 11.5_
 
-  - [~] 5.5 Escribir test de propiedad para contenido de TarjetaApi
+  - [x] 5.5 Escribir test de propiedad para contenido de TarjetaApi
     - **Propiedad 5: Tarjeta API contiene información requerida**
     - **Valida: Requisitos 5.3**
 
