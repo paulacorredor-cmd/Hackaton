@@ -6,6 +6,7 @@ import { Download } from 'lucide-react';
 import NavBar from '@/app/components/ui/NavBar';
 import TarjetaApi from '@/app/components/catalogo/TarjetaApi';
 import {
+  type ApiDefinition,
   type LineaSeguro,
   filtrarApisPorLinea,
   generarManifiestoAI,
