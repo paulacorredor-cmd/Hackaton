@@ -129,8 +129,8 @@ Implementación incremental del portal de desarrolladores de Seguros Bolívar us
 - [~] 7. Checkpoint — Verificar módulo de Catálogo
   - Asegurar que todos los tests pasan, preguntar al usuario si surgen dudas.
 
-- [ ] 8. Implementar módulo AI Playground
-  - [~] 8.1 Crear layout del AI Playground con paneles Chat y Log
+- [x] 8. Implementar módulo AI Playground
+  - [x] 8.1 Crear layout del AI Playground con paneles Chat y Log
     - Implementar `app/playground/page.tsx` con interfaz dividida: Panel_Chat (izquierda) y Panel_Log (derecha)
     - Implementar `PanelChat` con campo de entrada de texto, historial de mensajes (socio/agente) y estado de carga
     - Implementar `PanelLog` con pasos de traza expandibles, colores diferenciados (interpretación: #FFD700, petición: #00843D, respuesta: #FFFFFF sobre fondo oscuro)
@@ -139,31 +139,31 @@ Implementación incremental del portal de desarrolladores de Seguros Bolívar us
     - Navegación completa por teclado
     - _Requisitos: 8.1, 8.2, 8.3, 8.5, 9.1, 9.2, 9.3, 9.4, 11.1_
 
-  - [~] 8.2 Escribir test de propiedad para historial de chat
+  - [x] 8.2 Escribir test de propiedad para historial de chat
     - **Propiedad 8: Historial de chat preserva orden y contenido**
     - **Valida: Requisitos 8.3**
 
-  - [~] 8.3 Escribir test de propiedad para renderizado de pasos de traza
+  - [x] 8.3 Escribir test de propiedad para renderizado de pasos de traza
     - **Propiedad 9: Renderizado de pasos de traza incluye información completa**
     - **Valida: Requisitos 8.5, 9.1**
 
-  - [~] 8.4 Implementar API Route del agente AI y streaming de trazas
+  - [x] 8.4 Implementar API Route del agente AI y streaming de trazas
     - Implementar `app/api/ai/chat/route.ts` con endpoint para procesar instrucciones en lenguaje natural
     - Identificar endpoint correspondiente a la instrucción del socio
     - Ejecutar petición al sandbox con credenciales del socio autenticado
     - Enviar trazas al cliente vía Server-Sent Events para visualización en tiempo real
     - _Requisitos: 8.4, 8.5, 8.6_
 
-  - [~] 8.5 Escribir tests unitarios para AI Playground
+  - [x] 8.5 Escribir tests unitarios para AI Playground
     - Test de layout de paneles (chat + log)
     - Test de campo de entrada y envío de mensajes
     - Test de expansión de pasos en Panel_Log
     - _Requisitos: 8.1, 8.2, 9.3_
 
-- [~] 9. Checkpoint — Verificar módulo AI Playground
+- [x] 9. Checkpoint — Verificar módulo AI Playground
   - Asegurar que todos los tests pasan, preguntar al usuario si surgen dudas.
 
-- [ ] 10. Implementar seguridad, autenticación y auditoría
+- [~] 10. Implementar seguridad, autenticación y auditoría
   - [~] 10.1 Configurar autenticación OAuth 2.0 + OIDC y middleware de protección de rutas
     - Implementar `app/api/auth/[...nextauth]/route.ts` con proveedor OAuth 2.0 + OpenID Connect
     - Crear middleware para proteger rutas de catálogo y playground (requieren autenticación)
@@ -185,7 +185,7 @@ Implementación incremental del portal de desarrolladores de Seguros Bolívar us
     - Test de redirección a login por sesión expirada
     - _Requisitos: 10.3, 10.4_
 
-- [ ] 11. Implementar tests de accesibilidad
+- [~] 11. Implementar tests de accesibilidad
   - [~] 11.1 Crear suite de tests de accesibilidad para todos los módulos
     - Verificar navegación completa por teclado en cada módulo (catálogo, playground, onboarding)
     - Verificar contraste mínimo 4.5:1 con combinaciones de colores institucionales
@@ -194,7 +194,7 @@ Implementación incremental del portal de desarrolladores de Seguros Bolívar us
     - Verificar estructura semántica con h2/h3 en catálogo
     - _Requisitos: 11.1, 11.2, 11.3, 11.4, 11.5_
 
-- [ ] 12. Integración final y cableado de módulos
+- [~] 12. Integración final y cableado de módulos
   - [~] 12.1 Conectar flujo completo de onboarding con autenticación y catálogo
     - Integrar registro → términos → sandbox → redirección a catálogo
     - Asegurar que credenciales sandbox se propagan al visor de documentación y AI Playground
